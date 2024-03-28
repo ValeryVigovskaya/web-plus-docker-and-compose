@@ -1,0 +1,31 @@
+version: '3.9'
+
+services:
+  backend:
+    container_name: first-backend
+    build: 
+      context: backend
+      dockerfile: Dockerfile
+    image: compose-first-backend-optim
+    ports:
+      - 4000:3000
+    env_file: 
+      - .env
+  frontend:
+    container_name: first-frontend
+    build: 
+      context: frontend
+      dockerfile: Dockerfile
+    image: compose-first-frontend-optim
+    ports:
+      - 8081:80
+  postgres:
+    container_name: postgres
+    volumes:
+      - postgres_bd:/data/postgres
+    image: postgres
+    env_file: 
+      - .env
+
+volumes: 
+  postgres_bd: 
